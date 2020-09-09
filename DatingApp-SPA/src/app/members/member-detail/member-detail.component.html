@@ -1,11 +1,11 @@
 <div class="container mt-4">
   <div class="row">
-    <h1>{{user.knownAs}}'s profile</h1>
+    <h1>{{user.knownAs | titlecase}}'s profile</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoURL}}" alt="{{user.knownAs}}">
+        <img class="card-img-top img-thumbnail" src="{{user.photoURL || '../../../assets/user.png'}}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
             <strong>Location:</strong>
@@ -35,15 +35,24 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="About {{user.knownAs}}">
+          <tab heading="About {{user.knownAs | titlecase}}">
             <h4>Description</h4>
             <p>{{user.introduction}}</p>
+            <div class="row ml-2" *ngIf="!user.introduction">
+              <p>Tell us something about you</p>
+            </div>
             <h4>Looking for</h4>
             <p>{{user.lookingFor}}</p>
+            <div class="row ml-2" *ngIf="!user.lookingFor">
+              <p>Tell us something about you</p>
+            </div>
           </tab>
           <tab heading="Interests">
             <h4>Interests</h4>
             <p>{{user.interests}}</p>
+            <div class="row ml-2" *ngIf="!user.interests">
+              <p>Tell us something about you</p>
+            </div>
           </tab>
           <tab heading="Photos">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>

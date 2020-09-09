@@ -34,14 +34,14 @@ namespace DatingApp.API.Controllers
         if (await _repo.UserExists(userFromRepoDto.Username))
             return BadRequest("User already exists");
 
-        var userToCreate = new User
-        {
-            Username = userFromRepoDto.Username
-        };
+        var userToCreate = _mapper.Map<User>(userFromRepoDto);
 
         var userCreated = await _repo.Register(userToCreate, userFromRepoDto.Password);
 
-        return StatusCode(201);
+        var userToReturn = _mapper.Map<UserForDetailDTO>(userCreated);
+
+        return CreatedAtRoute("GetUser",
+         new {controller = "Users", id = userCreated.Id}, userToReturn);
     }
 
     [HttpPost("login")]
