@@ -4,6 +4,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
+import { MembersListComponent } from '../members/members-list/members-list.component';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if(this.registerForm.valid) {
+    if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(() => {
         this.alertify.success('Registration succesfully');

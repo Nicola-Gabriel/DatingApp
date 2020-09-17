@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace DatingApp.API.DTOs
 {
     public class UserFromRepoDto
-    {   
+    {  
+        [Required]
+         public string Gender { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]
